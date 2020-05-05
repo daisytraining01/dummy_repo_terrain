@@ -15,17 +15,21 @@ public class WebTable {
 	
 		public static void tableData() {
 		
-			WebElement tablebody=driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/table/tbody"));
+						
+			WebElement table=driver.findElement(By.xpath("//*[@id='main']/div[3]/table/tbody/tr[1]/th"));
 			
-			tablebody.getSize();
-			
-			WebElement tableheader=driver.findElement(By.xpath("//*[@id='main']/div[3]/table/tbody/tr[1]/th"));
-			
-			tableheader.getSize();
-			
-			WebElement tablerow=driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/table/tbody/tr"));
-			
-			System.out.println(tablerow.getText());
+			List<WebElement> rows=table.findElements(By.tagName("tr"));
+			 
+			for(int rownum=0;rownum<rows.size();rownum++)
+			{
+			List<WebElement> columns=rows.get(rownum).findElements(By.tagName("th"));
+			System.out.println("Number of columns:"+columns.size());
+			 
+			for(int colnum=0;colnum<columns.size();colnum++)
+			{
+			System.out.println(columns.get(colnum).getText());
+			}
+			}
 			
 			driver.close();
 		}
